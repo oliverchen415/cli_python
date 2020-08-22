@@ -6,8 +6,23 @@ from dotenv import load_dotenv
 load_dotenv()
 
 @click.command()
-@click.argument('location', default='San Francisco, CA')
-def current_weather(location, api_key=os.getenv('API_KEY')):
+@click.argument('location', default="San Francisco, US")
+@click.option('--api-key', '-a', help='your API key for the OpenWeatherMap API', default=os.getenv('API_KEY'))
+def current_weather(location, api_key):
+    """[Gets the weather for a given location]
+
+    Args:
+        location ([String]):
+        [
+            Provide a city name, ZIP code (defaults to US), or latitude/longitude.
+            If your city contains spaces, enclose the name in quotation marks.
+        ]
+        api_key ([type], optional):
+        [
+            Provide an API key using a .env file. An example is found in the main folder.
+        ].
+        Defaults to os.getenv('API_KEY').
+    """
     url = 'https://api.openweathermap.org/data/2.5/forecast?'
 
     query_params = {
