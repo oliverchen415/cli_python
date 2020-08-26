@@ -12,6 +12,8 @@ alphaNum = upperCaseList + lowerCaseList + numeralsList + symbolsList
 anNoSymbols = upperCaseList + lowerCaseList + numeralsList
 
 def pwgen(max_len, symbols=True):
+    if (max_len < 4 and symbols == True) or (max_len < 3 and symbols == False):
+        raise ValueError('Invalid password length, enter a valid length.')
     if symbols == True:
         pwStart = [random.choice(upperCaseList), random.choice(lowerCaseList), random.choice(numeralsList), random.choice(symbolsList)]
     else:
