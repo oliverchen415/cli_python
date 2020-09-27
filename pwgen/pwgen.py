@@ -32,8 +32,9 @@ def pwgen(max_len, symbols=True):
 
 @click.command()
 @click.option('--symbols', '-s', type=bool, default=True,
+              prompt='Use symbols? True/False',
               help='add or remove symbols from passwords, default is True')
-@click.argument('length', type=int)
+@click.option('--length', type=int, prompt='Length of password')
 def main(length, symbols):
     click.echo(pwgen(length, symbols))
 

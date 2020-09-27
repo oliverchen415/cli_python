@@ -1,13 +1,15 @@
 import requests
 import click
 import os
-import requests
 from dotenv import load_dotenv
 load_dotenv()
 
 @click.command()
-@click.argument('location', default="San Francisco, US")
-@click.option('--api-key', '-a', help='your API key for the OpenWeatherMap API', default=os.getenv('API_KEY'))
+@click.option('--location',
+              default="San Francisco, US",
+              prompt='Give a city (and US state, if necessary), ZIP Code, etc.]')
+@click.option('--api-key', '-a', help='your API key for the OpenWeatherMap API',
+              default=os.getenv('API_KEY'))
 def current_weather(location, api_key):
     """[Gets the weather for a given location]
 
@@ -34,8 +36,8 @@ def current_weather(location, api_key):
     response = requests.get(url, params=query_params)
     description = response.json()['list'][0]['weather'][0]['description']
     temp = response.json()['list'][0]['main']['temp']
-    print(f'The current temperature in {location} is {temp}°F.')
-    print(f'The current weather condition is: {description}.')
+    click.echo(f'The current temperature in {location} is {temp}°F.')
+    click.echo(f'The current weather condition is: {description}.')
 
 if __name__ == '__main__':
     current_weather()
