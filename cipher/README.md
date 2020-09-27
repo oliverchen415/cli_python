@@ -11,7 +11,7 @@ To use the program, enter on your terminal:
 
 The program will prompt you for these two arguments, and then print out the encrypted message.
 
-Example:
+**Example**:
 
 * Hello world!
 
