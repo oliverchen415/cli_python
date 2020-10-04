@@ -1,4 +1,5 @@
-import random
+# import random
+import secrets
 
 import click
 
@@ -15,18 +16,18 @@ def pwgen(max_len, symbols=True):
     if (max_len < 4 and symbols == True) or (max_len < 3 and symbols == False):
         raise ValueError('Invalid password length, enter a valid length.')
     if symbols == True:
-        pwStart = [random.choice(upperCaseList), random.choice(lowerCaseList), random.choice(numeralsList), random.choice(symbolsList)]
+        pwStart = [secrets.choice(upperCaseList), secrets.choice(lowerCaseList), secrets.choice(numeralsList), secrets.choice(symbolsList)]
     else:
-        pwStart = [random.choice(upperCaseList), random.choice(lowerCaseList), random.choice(numeralsList)]
+        pwStart = [secrets.choice(upperCaseList), secrets.choice(lowerCaseList), secrets.choice(numeralsList)]
     charRemain = max_len - len(pwStart)
     newAlphaNum = 0
     while newAlphaNum < charRemain:
         if symbols == True:
-            pwStart += random.choice(alphaNum)
+            pwStart += secrets.choice(alphaNum)
         else:
-            pwStart += random.choice(anNoSymbols)
+            pwStart += secrets.choice(anNoSymbols)
         newAlphaNum += 1
-    random.shuffle(pwStart)
+    secrets.SystemRandom().shuffle(pwStart)
     pwStart = ''.join(pwStart)
     return pwStart
 
